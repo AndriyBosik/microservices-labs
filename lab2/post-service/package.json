@@ -1,0 +1,16 @@
+{
+  "name": "post-service",
+  "version": "1.0.0",
+  "description": "Post service on Kubernetes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Andrii Bosyk",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.16.1",
+    "pg": "^8.7.1"
+  }
+}

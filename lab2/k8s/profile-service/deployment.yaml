@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: profile-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: profile
+  template:
+    metadata:
+     labels:
+       app: profile
+    spec:
+      containers:
+        - image: service/profile:latest
+          imagePullPolicy: Never
+          name: profile-service
+          ports:
+            - containerPort: 8080

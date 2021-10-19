@@ -1,0 +1,15 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: service2-virtual
+spec:
+  hosts:
+    - fake-post-service
+  http:
+    - route:
+        - destination:
+            host: fake-post-service
+      timeout: 5s
+      retries:
+        attempts: 3
+        perTryTimeout: 5s

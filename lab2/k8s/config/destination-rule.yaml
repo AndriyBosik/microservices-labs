@@ -1,0 +1,11 @@
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: fake-post-destination
+spec:
+  host: fake-post-service
+  trafficPolicy:
+    outlierDetection:
+      interval: 10s
+      baseEjectionTime: 30s
+      maxEjectionPercent: 80

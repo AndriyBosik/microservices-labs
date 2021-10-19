@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+    frontend:
+        image: blog/frontend:latest
+        container_name: frontend
+        ports:
+            - "3000:3000"
+    profile_service:
+        image: service/profile:latest
+        container_name: profile_service
+        ports:
+            - "8080:8080"
+    post_service:
+        image: service/post:latest
+        container_name: post_service
+        ports:
+            - "8000:8000"
+    postgres:
+        image: postgres:latest
+        container_name: postgres
+        environment:
+            POSTGRES_USER: "postgres"
+            POSTGRES_PASSWORD: "postgres"
+        ports:
+            - "5432:5432"
+        volumes:
+            - /home/andrii/Data/Study/PostgreSQL:/var/lib/postgresql/data
+    pgadmin:
+        image: thajeztah/pgadmin4
+        container_name: pgadmin4
+        ports:
+            - "5050:5050"
