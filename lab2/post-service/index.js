@@ -1,4 +1,5 @@
 const express = require("express");
+const axios = require("axios");
 //const Client = require("pg").Client;
 
 require("dotenv").config();
@@ -28,6 +29,39 @@ const posts = [
 ];
 
 const app = express();
+
+app.use((request, response, next) => {
+	response.setHeader("Access-Control-Allow-Origin", "http://192.168.49.2");
+
+	response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
+
+	next();
+});
+
+let sum = 0;
+
+const makeRequest = async (i) => {
+	const start = new Date().getTime();
+	const response = await axios.get("http://192.168.49.2/api/fake-posts/user/1");
+	const end = new Date().getTime();
+	sum += end - start;
+	console.log(response);
+	if (i === 99) {
+		console.log(sum);
+	}
+}
+
+app.get("/api/posts/test", async (request, response) => {
+	for (let i = 0; i < 100; i++) {
+		if (i == 99) {
+			await makeRequest(i);
+		} else {
+			makeRequest(i);
+		}
+	}
+	response.status(200).json({});
+});
+
 app.get("/api/posts/user/:userId", (request, response) => {
 	/*client.query(`SELECT * FROM posts WHERE user_id=${request.params.userId}`, (error, result) => {
 		if (error) {

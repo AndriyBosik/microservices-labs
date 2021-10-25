@@ -36,6 +36,8 @@ let isBroken = false;
 const app = express();
 
 app.use((request, response, next) => {
+	response.setHeader("Access-Control-Allow-Origin", "http://192.168.49.2");
+
 	response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
 
 	next();
